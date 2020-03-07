@@ -17,6 +17,7 @@
 	},
 	"license": "MIT",
 	"main": "lib/scripts/index.js",
+	"types": "lib/typings",
 	"bin": {
 		"vue-styleguidist": "lib/bin/styleguidist.js"
 	},

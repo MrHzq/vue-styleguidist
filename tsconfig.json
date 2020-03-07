@@ -17,8 +17,12 @@
 		},
 		"strictFunctionTypes": false,
 		"jsx": "react",
-		"types": ["jest", "node", "htmlparser2", "buble"]
+		"types": ["jest", "node", "htmlparser2", "buble"],
+		"typeRoots": ["node_modules/@types", "node_modules/react-styledguidist/lib/typings"]
 	},
-	"include": ["packages/**/*.ts", "test/**/*.ts"],
-	"exclude": ["node_modules"]
+	"include": [
+		"packages/**/*.ts",
+		"test/**/*.ts",
+		"node_modules/react-styledguidist/lib/typings/**/*.d.ts"
+	]
 }
