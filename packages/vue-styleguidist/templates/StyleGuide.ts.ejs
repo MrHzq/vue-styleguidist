@@ -10,11 +10,11 @@ import React from 'react'
 import WebpackDevServer from 'webpack-dev-server'
 import { ComponentDoc, PropDescriptor } from 'vue-docgen-api'
 import { TransformOptions } from 'buble'
-import { Styles, StyleSheet } from 'jss';
+import { Styles } from 'jss';
 import { Configuration, loader } from 'webpack'
 import * as Rsg from 'react-styleguidist/lib/typings'
 import { EXPAND_MODE } from './enums'
-import { Example, ExampleLoader } from './Example'
+import { ExampleLoader } from './Example'
 import { ComponentProps } from './Component'
 
 export interface StyleguidistContext extends loader.LoaderContext {

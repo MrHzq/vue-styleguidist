@@ -304,7 +304,7 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		default: [],
 		process: (
 			value: Rsg.ConfigSection[] | undefined,
-			config: StyleguidistConfig
+			config: Rsg.StyleguidistConfig
 		): Rsg.ConfigSection[] => {
 			if (!value) {
 				// If root `components` isn't empty, make it a first section
