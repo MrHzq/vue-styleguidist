@@ -6,7 +6,7 @@ import { castArray } from 'lodash'
 import requireIt from 'react-styleguidist/lib/loaders/utils/requireIt'
 import getComponentFiles from 'react-styleguidist/lib/loaders/utils/getComponentFiles'
 import slugger from 'react-styleguidist/lib/loaders/utils/slugger'
-import { Section, ProcessedSection } from '../../types/Section'
+import * as Rsg from 'react-styleguidist/lib/typings'
 import { StyleguidistConfig } from '../../types/StyleGuide'
 import getComponents from './getComponents'
 
@@ -21,10 +21,10 @@ const examplesLoader = path.resolve(__dirname, '../examples-loader.js')
  * @returns {Array}
  */
 export default function getSections(
-	sections: Section[],
+	sections: Rsg.ConfigSection[],
 	config: StyleguidistConfig,
 	parentDepth?: number
-): ProcessedSection[] {
+): Rsg.LoaderSection[] {
 	return sections.map(section => processSection(section, config, parentDepth))
 }
 

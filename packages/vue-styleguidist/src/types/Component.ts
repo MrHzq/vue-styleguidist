@@ -6,6 +6,7 @@ import {
 	BlockTag
 } from 'vue-docgen-api'
 import * as b from '@babel/types'
+import * as Rsg from 'react-styleguidist/lib/typings'
 import { Example } from './Example'
 
 export interface ComponentProps {
@@ -25,14 +26,6 @@ export interface ComponentProps {
 	example?: Example[][]
 }
 
-export interface Component {
-	visibleName?: string
-	filepath?: string
-	slug?: string
-	pathLine?: string
-	hasExamples?: boolean
-	name?: string
+export interface Component extends Omit<Rsg.Component, 'props'> {
 	props: ComponentProps
-	module: { require: string; toAST: () => any; default?: any } | any
-	metadata: any
 }
