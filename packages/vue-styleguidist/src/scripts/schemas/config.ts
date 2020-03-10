@@ -46,7 +46,7 @@ export default {
 	// `components` is a shortcut for { sections: [{ components }] },
 	// see `sections` below
 	components: {
-		tstype: '() => (string | string[]) | string | string[]',
+		tstype: '(() => string[]) | string | string[]',
 		uitype: 'string',
 		message: 'Components',
 		description:
@@ -82,7 +82,7 @@ export default {
 		default: false
 	},
 	dangerouslyUpdateWebpackConfig: {
-		tstype: '(server: Configuration, env: string) => Configuration',
+		inherit: true,
 		description: 'Allows you to modify webpack config without any restrictions',
 		type: 'function'
 	},
@@ -287,7 +287,12 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		type: 'directory path'
 	},
 	ribbon: {
-		tstype: ['{', '		url: string,', '		text: string', '	}'].join('\n'),
+		tstype: [
+			'{', // comment for prettier formatting
+			'		url: string,',
+			'		text: string',
+			'	}'
+		].join('\n'),
 		uitype: 'boolean',
 		message: 'Ribbon',
 		description:
@@ -396,8 +401,8 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		default: ''
 	},
 	styles: {
+		inherit: true,
 		type: ['object', 'existing file path', 'function'],
-		tstype: 'Styles | string | ((theme: any) => Styles)',
 		default: {},
 		example: {
 			Logo: {
@@ -423,8 +428,8 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		}
 	},
 	theme: {
+		inherit: true,
 		type: ['object', 'existing file path'],
-		tstype: '{ [name: string]: any } | string',
 		default: {},
 		example: {
 			link: 'firebrick',
@@ -467,7 +472,7 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		removed: `Use "webpackConfig" option instead:\n${consts.DOCS_WEBPACK}`
 	},
 	usageMode: {
-		tstype: 'EXPAND_MODE',
+		inherit: true,
 		message: 'Usage Mode',
 		description: 'Defines the initial state of the props and methods tab',
 		list: MODES,
@@ -478,7 +483,7 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		default: 'collapse'
 	},
 	tocMode: {
-		tstype: 'EXPAND_MODE',
+		inherit: true,
 		message: 'Table Of Contents Collapsed mode',
 		description:
 			'If set to collapse, the sidebar sections are collapsed by default. Handy when dealing with big Components bases',
@@ -508,7 +513,7 @@ https://vue-styleguidist.github.io/Configuration.html#editorconfig `,
 		deprecated: 'Use renderRootJsx option instead'
 	},
 	webpackConfig: {
-		tstype: 'Configuration',
+		inherit: true,
 		type: ['object', 'function'],
 		process: (val?: Configuration) => {
 			if (val) {

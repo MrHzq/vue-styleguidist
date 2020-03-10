@@ -10,20 +10,21 @@ import React from 'react'
 import WebpackDevServer from 'webpack-dev-server'
 import { ComponentDoc, PropDescriptor } from 'vue-docgen-api'
 import { TransformOptions } from 'buble'
-import { Styles } from 'jss';
-import { Configuration, loader } from 'webpack'
-import * as Rsg from 'react-styleguidist/lib/typings'
+import { loader } from 'webpack'
+import * as Rsg from 'react-styleguidist'
 import { EXPAND_MODE } from './enums'
 import { ExampleLoader } from './Example'
 import { ComponentProps } from './Component'
-
+ 
 export interface StyleguidistContext extends loader.LoaderContext {
-_styleguidist: StyleguidistConfig
+    _styleguidist: StyleguidistConfig
 }
 
-export interface StyleguidistConfig {<% 
+export interface StyleguidistConfig
+    extends Omit<Rsg.ProcessedStyleguidistConfig, 'propsParser' | 'sortProps' | 'updateDocs'> {<% 
     Object.keys(schema).forEach(key => {
         const opt = schema[key]
+        if(opt.inherit)return
         const description = opt.description || opt.message
         const defaultShowable = ['boolean', 'number', 'string'].indexOf(typeof opt.default) > -1
 if(description || defaultShowable || opt.deprecated){%>

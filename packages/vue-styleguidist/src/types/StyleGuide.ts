@@ -10,9 +10,8 @@ import React from 'react'
 import WebpackDevServer from 'webpack-dev-server'
 import { ComponentDoc, PropDescriptor } from 'vue-docgen-api'
 import { TransformOptions } from 'buble'
-import { Styles } from 'jss'
-import { Configuration, loader } from 'webpack'
-import * as Rsg from 'react-styleguidist/lib/typings'
+import { loader } from 'webpack'
+import * as Rsg from 'react-styleguidist'
 import { EXPAND_MODE } from './enums'
 import { ExampleLoader } from './Example'
 import { ComponentProps } from './Component'
@@ -21,7 +20,8 @@ export interface StyleguidistContext extends loader.LoaderContext {
 	_styleguidist: StyleguidistConfig
 }
 
-export interface StyleguidistConfig {
+export interface StyleguidistConfig
+	extends Omit<Rsg.ProcessedStyleguidistConfig, 'propsParser' | 'sortProps' | 'updateDocs'> {
 	/**
 	 * Your application static assets folder, will be accessible as / in the style guide dev server.
 	 */
@@ -35,7 +35,7 @@ export interface StyleguidistConfig {
 	/**
 	 * Where to find the components. Takes in a String or an Array of glob paths. Comma separated.
 	 */
-	components: () => (string | string[]) | string | string[]
+	components: (() => string[]) | string | string[]
 	configDir: string
 	context: Record<string, any>
 	contextDependencies: string[]
@@ -45,10 +45,6 @@ export interface StyleguidistConfig {
 	 * @default false
 	 */
 	copyCodeButton: boolean
-	/**
-	 * Allows you to modify webpack config without any restrictions
-	 */
-	dangerouslyUpdateWebpackConfig: (server: Configuration, env: string) => Configuration
 	/**
 	 * Display each component with a default example, regardless of if there's a README or <docs/> block written.
 	 * @default false
@@ -196,9 +192,7 @@ export interface StyleguidistConfig {
 	 * @default ""
 	 */
 	styleguidePublicPath: string
-	styles: Styles | string | ((theme: any) => Styles)
 	template: any
-	theme: { [name: string]: any } | string
 	/**
 	 * Style guide title
 	 */
@@ -206,16 +200,6 @@ export interface StyleguidistConfig {
 	updateDocs: (doc: ComponentProps, file: string) => ComponentProps
 	updateExample: (props: ExampleLoader, ressourcePath: string) => ExampleLoader
 	updateWebpackConfig: any
-	/**
-	 * Defines the initial state of the props and methods tab
-	 * @default "collapse"
-	 */
-	usageMode: EXPAND_MODE
-	/**
-	 * If set to collapse, the sidebar sections are collapsed by default. Handy when dealing with big Components bases
-	 * @default "expand"
-	 */
-	tocMode: EXPAND_MODE
 	/**
 	 * Should the passed filepath be parsed by docgen if mentionned extends
 	 */
@@ -233,7 +217,6 @@ export interface StyleguidistConfig {
 	 * @deprecated Use renderRootJsx option instead
 	 */
 	vuex: any
-	webpackConfig: Configuration
 }
 
 export interface StyleGuideObject {
